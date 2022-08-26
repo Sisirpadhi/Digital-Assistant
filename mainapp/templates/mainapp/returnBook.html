@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Return Book</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <style>
+        body{
+            margin: 20px;
+            background-color: #FFF5EE; 
+        }
+
+        #message{
+            text-align: center;
+        }
+
+        button{
+            margin: 5px;
+        }
+        #header{
+            margin-bottom: 50px;
+            font-size: 70px;
+        }
+        #form{
+            width: 700px;
+        }
+        #lt{
+            padding-left: 100px;
+            width: 60%;
+            float: left;
+        }
+        #rt{
+            width: 40%;
+            float: left;
+            padding-right: 100px;
+        }
+    </style>
+</head>
+<body>
+    {% if msg %} 
+        <div id="message" class="alert alert-info" role="alert">{{msg}}</div>
+    {% endif %} 
+    <div id="header">
+        <h1 align="center">Verify Returned Book</h1>
+    </div>
+    <div id="lt">
+    <form action="{% url 'return_book' lib %}" method="post">
+        {% csrf_token %}
+        <div id="form" class="input-group mb-3">
+            <span class="input-group-text">Book ISBN number: </span>
+            <input type="number" name="isbn" id="isbn" class="form-control" aria-label="Amount (to the nearest dollar)" required>
+            <input class="input-group-text" type="submit" value="Get Book">
+          </div>
+    </form>
+    {% if b %}
+        <h3>Book ISBN code: {{b.BookIsbnNumber}}</h3>
+        <ul>
+            <li>Book Name: {{b.Book.bookName}}</li>
+            <li>Publisher: {{b.Book.publication}}</li>
+            <li>Edition: {{b.Book.edition}}</li>
+            <li>Authors:  </li>
+            <li>Availability Status: {{b.BookAvalibilityStatus}}</li>
+            <li>Reserverd Status: {{b.BookReserverdStatus}}</li>
+            {% if b.BookAvalibilityStatus == False %} 
+            <li>Assigned Student: {{b.Student.name}}</li>
+            <li>Date of Issue: {{b.BookIssuedate.date}} </li>
+            <li>Due date: {{b.BookDuedate.date}} </li>
+            {% endif %}
+            {% if b.BookReserverdStatus == True %}
+            <li>Reserved Student: {{b.Reserved_Stu.name}}</li>
+            {% endif %}
+        </ul>
+        {% if b.BookAvalibilityStatus == False %} 
+            <a href="{% url 'book_returned' lib=lib bId=b.id %}"><button class="btn btn-primary ">Book Returned</button></a>
+        {% endif %}
+    {% endif %}
+    </div>
+    <div id = "rt"><p align="right"><a href="{% url 'lib_home' lib %}"><button class="btn btn-primary">Back to Home</button></a></div></p>
+</body>
+</html>

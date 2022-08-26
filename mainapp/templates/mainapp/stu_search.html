@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search a Book</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <style>
+         
+        #ra{
+            width: 30%;
+            padding: 8px 20px;
+            margin: 7px 0px 23px 30px;
+            box-sizing: border-box;
+            border-radius: 5px ;
+            position: absolute;
+            top: 30%;
+            left: 28%;
+            border: 3.5px outset rgba(104, 84, 84, 0.925);
+            font-size: 15px;
+            text-align: center;
+        } 
+        #ru{
+            width: 25%;
+            padding: 8px 20px;
+            margin: 7px 0px 23px 30px;
+            box-sizing: border-box;
+            border-radius: 5px ;
+            position: absolute;
+            top: 50%;
+            left: 30.5%;
+            border: 3.5px outset rgba(104, 84, 84, 0.925);
+            font-size: 15px;
+            text-align: center;
+        } 
+        #ru:hover{
+            background-color: turquoise;
+        }
+
+        #f{
+            text-align: right;
+            display: inline;
+            text-decoration:none ;
+            border: 2px ridge black;
+            position: absolute;
+            top:8%;
+            left: 85%;
+            margin-left: 16px;
+            border-radius: 5px;
+            padding: 5px;
+            background-color: wheat;
+            font-size: 20px;
+            letter-spacing: 1.2px;
+            text-decoration: none !important;
+        }
+        h1{
+            text-align: center;
+            font-size: 35px;
+            color: rgb(27, 29, 168);
+        }
+        body{
+                margin: 20px;
+                background-color: #FFF5EE; 
+            }
+    </style>
+</head>
+<body>
+    <h1>Welcome ! Search for your required Book </h1>
+    <div id="f" class>
+    <a style="text-decoration: none" !important; href="{% url 'stu_home' stu %}">Back to Home</a>
+    </div>
+    <form method="post" action="{% url 'book' stu %}">
+        {% csrf_token %}
+        <input class="form-control" id ="ra"name="book" list="books" placeholder="Enter the Book name" required>
+        <datalist id="books">
+            {% for b in booklist %}
+                <option value="{{b.bookName}}">
+            {% endfor %}
+        </datalist>
+        <input id ="ru" type="submit" value="Search">
+    </form>
+    
+</body>
+</html>

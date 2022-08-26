@@ -1,0 +1,92 @@
+h1{
+    background-color: #3cbc8d;
+    text-align: center;
+    border: 2px double;
+    padding: 5px 30px;
+    border-radius: 10px;
+    position: relative;
+    top: 30px;
+    left:20%;
+    font-family: Georgia, serif;
+    font-size: 40px;
+    display: inline;  
+    
+}
+input{
+    width: 50%;
+    padding: 8px 20px;
+    margin: 7px 0px 23px 30px;
+    box-sizing: border-box;
+    border-radius: 5px ;
+    position: relative;
+    top: 8px;
+    border: 3.5px outset rgba(104, 84, 84, 0.925);
+    font-size: 15px;
+    text-align: left;
+}
+label{
+    font-size: 22px;
+    padding: 50px 0px 10px 30px;
+    position: relative;
+    top: 2px;
+    text-align: center;
+}
+input[type=submit]{
+    position: relative;
+    left: 15%;
+    width: 20%;
+    background-color:  #4caf50;
+    text-align: center;
+}
+.fu1{
+    text-decoration:none ;
+    border: 2px ridge black;
+    box-sizing: border-box;
+    margin-top: 100px;
+    height :20px;
+    position: relative;
+    top: 155px;
+    left: 60%;
+    border-radius: 5px;
+    padding: 5px 108px;
+    background-color: wheat;
+    text-shadow: 2px 2px 4px #000000;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+}
+
+.fu2{
+    text-decoration:none ;
+    border: 2px ridge black;
+    box-sizing: border-box;
+    margin-top: 100px;
+    height :20px;
+    width : 450px;
+    position: relative;
+    top: 173px;
+    left: 60%;
+    border-radius: 5px;
+    padding: 5px 103px;
+    background-color: wheat;
+    text-shadow: 2px 2px 4px #000000;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+}
+
+.fu3{
+    text-decoration:none ;
+    border: 2px ridge black;
+    box-sizing: border-box;
+    margin-top: 100px;
+    height :20px;
+    width : 20%;
+    position: relative;
+    top: 190px;
+    left: 60%;
+    border-radius: 5px;
+    padding: 5px 159px;
+    background-color: wheat;
+    text-shadow: 2px 2px 4px #000000;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+}

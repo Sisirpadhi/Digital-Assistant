@@ -1,0 +1,36 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Student Login</title>
+        <link rel="stylesheet" href="{% static 'index/stulogin.css' %}">
+        <style>
+            #msg{
+                margin:5px;
+            }
+        </style>
+    </head>
+    <body>
+        {% if msg %}
+        <div><p align="center" id="msg">{{msg}}</p></div>
+        {% endif %}
+        <div class = "center" >
+        <h1>Login</h1>
+        <hr>
+        <form method="post" action="{% url 'stu' %}">
+            {% csrf_token %}
+            <p>Username</p>
+            <input class = "x" type="text" name="username" placeholder="Enter Student Username">
+        
+            <p>Password</p>
+            <input class = "x" type="password" name="password" placeholder="Enter Student Password">
+            <br>
+            <input id= "log" type="submit" value="Login">
+        </form>
+        <div class = "register">
+           <span>New Student?</span>  <a href="{% url 'register' %}">Register</a>
+        </div>
+    </div>
+    </body>
+</html>

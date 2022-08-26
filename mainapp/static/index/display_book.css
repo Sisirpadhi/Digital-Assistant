@@ -1,0 +1,66 @@
+table, th, td{
+    border-collapse: collapse;
+    padding:  10px;
+    text-align: center;
+    font-family: Verdana, sans-serif;
+    font-size: 16px;
+    height: 45px;
+    width: 1250px;
+    margin: 20px 10px;
+}
+
+tr{
+    background-color: #f2f2f2;
+}
+
+th{
+    background-color: #04aa6d;
+}
+#sisir:hover{
+    background: rgba(0, 255, 255, 0.68) 
+}
+
+h1{
+    font-family: Georgia, serif;
+    font-size: 50px;
+    padding-left :21%;
+    padding-top: 30px;
+}
+a:hover{
+    background: rgba(0, 255, 255, 0.68) 
+}
+a.fu{
+    text-decoration:none ;
+    border: 2px ridge black;
+    position: relative;
+    top: 0px;
+    left: 85%;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: wheat;
+    text-shadow: 2px 2px 4px #000000;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+   
+}
+#sai{
+    text-decoration:none ;
+    border: 2px ridge black;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: rgb(226, 154, 21);
+    font-size : 20px;
+    letter-spacing: 1.5px;
+    text-shadow: 2px 2px 5px red;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(120deg,#a049e7, #8e44ad);
+    height: 100vh;
+  }
+
+  .vasu{
+      padding-left: 10px ;
+  }

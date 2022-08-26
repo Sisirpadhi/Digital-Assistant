@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Home</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <style>
+            body{
+                    margin: 20px;
+                    background-color: #FFF5EE; 
+                }
+    
+                #message{
+                    text-align: center;
+                }
+    
+                button{
+                    margin: 5px;
+                }
+                #lt{
+                    width: 85%;
+                    float: left;
+                }
+                #rt{
+                    width: 15%;
+                    float: left;
+                    margin-bottom: 30px;
+                }
+                .s{
+                    width: 200px;
+                }
+        </style>
+        
+    </head>
+    <body>
+        <div id="lt"><h1>Welcome, {{s.name}}</h1></div>
+        <div id="rt">
+            <a class="s btn btn-info" href="{% url 'stuprofile' s.username %}">View Profile</a>
+        </div>
+
+        <div>
+            <p align="center"><a  class="s btn btn-primary" href="{% url 'stu_books' s.username %}">View Taken Books</a></p>
+        </div>
+        <div>
+            <p align="center"><a class="btn btn-primary s" href="{% url 'stu_search' s.username %}">Search/Add a book</a></p>
+        </div>
+        <div>
+            <p align="center"><a class="btn btn-primary s" href="{% url 'stu_fine' s.username %}">View Total Fine</a></p>
+        </div>
+        <div>
+            <p align="center"><a class="btn btn-primary s" href="{% url 'extension' stu=s.username  %}">Request for Extension</a></p>
+        </div>
+        <div>
+            <p align="center"><a  class="btn btn-primary s" href="{% url 'index' %}">Log Out</a></p>
+        </div>
+    </body>
+</html>

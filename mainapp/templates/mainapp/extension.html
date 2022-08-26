@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Request for Extension</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <style>
+        body{
+                margin: 20px;
+                background-color: #FFF5EE; 
+            }
+
+            #message{
+                text-align: center;
+            }
+
+            button{
+                margin: 5px;
+            }
+    </style>
+    <style>
+        body
+        {
+            counter-reset: Serial;           
+        }
+
+        table
+        {
+            border-collapse: separate;
+        }
+
+        tr td:first-child:before
+        {
+            counter-increment: Serial;      /* Increment the Serial counter */
+            content:  counter(Serial); /* Display the counter */
+        }
+        #lt{
+            width: 85%;
+            float: left;
+            margin-bottom: 50px;
+        }
+        #rt{
+            width: 15%;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    {% if msg %} 
+    <div id="message" class="alert alert-info" role="alert">
+        {{msg}}
+    </div>
+    {% endif %}
+    <div id="lt"><h1 align="center">Request for Extending Duedate page</h1></div>
+    <div id="rt">
+        <a href="{% url 'stu_home' stu %}"><button class="btn btn-primary">Back to Home</button></a>
+    </div>
+    <table id="tbl" class="table table-striped table-bordered table-light table-hover table-bordered" border="1">
+        <tr  class="table-light">
+            <th scope="col" class="table-light">SNo.</th>
+            <th scope="col" class="table-light">Book ISBN Number</th>
+            <th scope="col" class="table-light">Book name</th>
+            <th scope="col" class="table-light">Due Date</th>
+            <th scope="col" class="table-light">Reserved Status</th>
+            <th scope="col" class="table-light">Option for Extension</th>
+        </tr>
+        {% for t in tbl %} 
+        <tr  class="table-light">
+            <td scope="row" class="table-light"></td>
+            <td class="table-light">{{t.BookIsbnNumber}}</td>
+            <td class="table-light">{{t.Book.bookName}}</td>
+            <td class="table-light">{{t.BookDuedate.date}}</td>
+            <td class="table-light">{{t.BookReserverdStatus}}</td>
+            <td class="table-light"><a href="{% url 'extend' stu=stu bId=t.id %}"><button class="btn btn-outline-info">Extend Duedate</button></a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div  class="alert alert-info" role="alert" id="al">
+        Clicking the "Extend Duedate" button extends the duedate by 10 more days
+    </div>
+    
+</body>
+</html>

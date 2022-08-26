@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Display Books</title>
+    <style>
+        body{
+                margin: 20px;
+                background-color: #FFF5EE; 
+        }
+
+        #message{
+            text-align: center;
+        }
+
+        button{
+            margin: 5px;
+        }
+        body
+        {
+            counter-reset: Serial;           
+        }
+
+        table
+        {
+            border-collapse: separate;
+        }
+
+        tr td:first-child:before
+        {
+            counter-increment: Serial;      /* Increment the Serial counter */
+            content:  counter(Serial); /* Display the counter */
+        }
+        #btoh{
+            position: relative;
+        }
+        #header{
+            width: 85%;
+            float: left;
+            font-size: 50px;
+        }
+        #btoh{
+            width: 15%;
+            float: left;
+        }
+        #btohb{
+            margin:5px;
+        }
+
+    </style>
+</head>
+<body>
+    {% if msg %} 
+    <div id="message" class="alert alert-info" role="alert">
+        {{msg}}
+    </div>
+    {% endif %}
+    <div><h1 align="center" id="header">List of All Books of Library</h1></div>
+    <div id="btoh">
+    <p align='right'><a id="btohb" class="btn btn-info" href="{% url 'lib_home' lib %}">Back to Home</a></p>
+    </div>
+    <table id="tbl" class="table table-striped table-bordered table-light table-hover table-bordered" border="1">
+        <tr  class="table-light">
+            <th scope="col" class="table-light">SNo.</th>
+            <th scope="col" class="table-light">Book ISBN Number</th>
+            <th scope="col" class="table-light">Book name</th>
+            <th scope="col" class="table-light">Availability Status</th>
+            <th scope="col" class="table-light">Option for Deletion</th>
+        </tr>
+        {% for t in bl %} 
+        <tr  class="table-light">
+            <td scope="row" class="table-light"></td>
+            <td scope="row" class="table-light">{{t.BookIsbnNumber}}</td>
+            <td scope="row" class="table-light">{{t.Book.bookName}}</td>
+            <td scope="row" class="table-light">{{t.BookAvalibilityStatus}}</td>
+            {% if t.BookAvalibilityStatus %}
+            <td><a href="{% url 'delete_bookcpy' lib=lib bId=t.id %}"><button class="btn btn-outline-danger">Delete Book</button></a></td>
+            {% else %} 
+            <td></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+    
+</body>
+</html>

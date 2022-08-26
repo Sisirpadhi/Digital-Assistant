@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Home</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <style>
+            body{
+                    margin: 20px;
+                    background-color: #FFF5EE; 
+                }
+    
+                #message{
+                    text-align: center;
+                }
+    
+                a{
+                    margin: 5px;
+                }
+                #header{
+                    width: 80%;
+                    float: left;
+                    margin-bottom: 10px;
+
+                }
+                #logdiv{
+                    width: 20%;
+                    float: left;
+                    height:50px;
+                    margin-bottom: 10px;
+                }
+                .s{
+                    width: 200px;
+                }
+        </style>
+        
+    </head>
+    <body>
+        <h1 id="header">Welcome, {{l.name}}</h1>
+        <div id="logdiv">
+            <p align="right"><a class="btn btn-primary" href="{% url 'libprofile' l.username %}" >View Profile</a></p>
+        </div>
+        
+        <div>
+            <p align="center"><a  class="s btn btn-primary" href="{% url 'add' l.username %}">Add Student</a></p>
+        </div>
+        <div>
+            <p align="center"><a class="btn btn-primary s" href="{% url 'requestList' l.username %}">View Register Requests</a></p>
+        </div>
+        <div>
+            <p align="center"><a class="btn btn-primary s" href="{% url 'display_books' l.username %}">Display All Books</a></p>
+        </div>
+        <div>
+            <p align="center"><a class="btn btn-primary s" href="{% url 'add_bookcopy' l.username %}">Add a new Book copy</a></p>
+        </div>
+        <div>
+            <p align="center"><a class="btn btn-primary s" href="{% url 'lib_return' l.username %}">Verify returned Book</a></p>
+        </div>
+        <div>
+            <p align="center"><a class="btn btn-primary s" href="{% url 'lib_delete' l.username %}">Remove Student</a></p>
+        </div>
+        <div>
+            <p align="center"><a  class="btn btn-primary s" href="{% url 'index' %}">Log Out</a></p>
+        </div>
+        
+    </body>
+</html>
+
+

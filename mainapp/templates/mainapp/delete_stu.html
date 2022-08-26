@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Remove Student</title>
+    <style>
+        body
+        {
+            counter-reset: Serial;           /* Set the Serial counter to 0 */
+        }
+
+        table
+        {
+            border-collapse: separate;
+        }
+
+        tr td:first-child:before
+        {
+            counter-increment: Serial;      /* Increment the Serial counter */
+            content:  counter(Serial); /* Display the counter */
+        }
+        
+        button{
+            margin: 5px;
+        }
+
+        #message{
+            text-align: center;
+        }
+
+        body{
+            margin: 20px;
+            background-color: #FFF5EE; 
+        }
+        #lt{
+            padding-left: 100px;
+            width: 80%;
+            float: left;
+        }
+        #rt{
+            width: 20%;
+            float: left;
+        }
+        #header{
+            margin-bottom: 50px;
+            font-size: 70px;
+        }
+        #form{
+            width:500px;
+            padding-top: 5px;
+            padding-left: 100px;
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+    {% if msg %} 
+        <div id="message" class="alert alert-info" role="alert">{{msg}}</div>
+    {% endif %}
+    <h1 align="center" id="header">Remove Student Portal</h1>
+    <div id="lt">
+    <form autocomplete="off" action="{% url 'get_stu' lib %}" method="post">
+        {% csrf_token %}
+        <div class="input-group mb-3" id="form">
+            <input name="student" aria-describedby="basic-addon2" class="form-control" list="students" placeholder="Enter Student Name" autocomplete="off" required>
+            <datalist id="students">
+                {% for s in sl %} 
+                    <option value="{{s.name}}">
+                {% endfor %}
+            </datalist>
+            <input class="input-group-text" type="submit" id="basic-addon2" value="search">
+        </div>
+    </form>
+    {% if s %} 
+        <h2>Student Details:</h2>
+        <ul>
+            <li>Student Name: {{s.name}}</li>
+            <li>Student Enrollment Number: {{s.enrollmentNumber}}</li>
+            <li>Student Contact Number: {{s.mobileNumber}}</li>
+            <li>Student Email Id: {{s.emailId}}</li>
+        </ul>
+        <h2>Student BookList:</h2>
+        <table id="tbl" class="table table-striped table-bordered table-light table-hover table-bordered" border="1">
+            <tr class="table-light">
+                <th scope="col" class="table-light">SNo.</th>
+                <th scope="col" class="table-light">Book ISBN Number</th>
+                <th scope="col" class="table-light">Book name</th>
+                <th scope="col" class="table-light">Issue Date</th>
+                <th scope="col" class="table-light">Due Date</th>
+            </tr>
+            {% for t in tbl %} 
+            <tr class="table-light">
+                <td scope="row" class="table-light"></td>
+                <td scope="row" class="table-light">{{t.BookIsbnNumber}}</td>
+                <td scope="row" class="table-light">{{t.Book.bookName}}</td>
+                <td scope="row" class="table-light">{{t.BookIssuedate.date}}</td>
+                <td scope="row" class="table-light">{{t.BookDuedate.date}}</td>
+            </tr>
+            {% empty %} 
+            <tr class="table-light">
+                <td scope="row" class="table-light"></td>
+                <td scope="row" class="table-light">-</td>
+                <td scope="row" class="table-light">-</td>
+                <td scope="row" class="table-light">-</td>
+                <td scope="row" class="table-light">-</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <h2>Student Reserverd BookList: </h2>
+        <table id="rbl" class="table table-striped table-bordered table-light table-hover table-bordered" border="1">
+            <tr class="table-light">
+                <th scope="col" class="table-light">SNo.</th>
+                <th scope="col" class="table-light">Book ISBN Number</th>
+                <th scope="col" class="table-light">Book name</th>
+                <th scope="col" class="table-light">Due Date</th>
+            </tr>
+            {% for t in rbl %} 
+            <tr class="table-light">
+                <td scope="row" class="table-light"></td>
+                <td scope="row" class="table-light">{{t.BookIsbnNumber}}</td>
+                <td scope="row" class="table-light">{{t.Book.bookName}}</td>
+                <td scope="row" class="table-light">{{t.BookDuedate.date}}</td>
+            </tr>
+            {% empty %} 
+            <tr class="table-light">
+                <td scope="row" class="table-light"></td>
+                <td scope="row" class="table-light">-</td>
+                <td scope="row" class="table-light">-</td>
+                <td scope="row" class="table-light">-</td>
+                <td scope="row" class="table-light">-</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="{% url 'delete_stu' lib=lib stuId=s.id %}"><button class="btn btn-primary">Remove Student</button></a>
+    {% endif %}
+    </div>
+    <div id="rt"><a href="{% url 'lib_home' lib %}"><button class="btn btn-primary">Back to Home</button></a></div>
+</body>
+</html>

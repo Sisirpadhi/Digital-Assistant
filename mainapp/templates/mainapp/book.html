@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Book</title>
+    <style>
+        body{
+                margin: 20px;
+                background-color: #FFF5EE; 
+            }
+
+            #message{
+                text-align: center;
+            }
+
+            button{
+                margin: 5px;
+            }
+            #form{
+                width: fit-content;
+                margin: 5px 0px 5px 0px;
+            }
+            h2{
+                font-size: 50px;
+            }
+            ul{
+                font-size: 20px;
+            }
+    </style>
+</head>
+<body>
+    {% if msg %}
+        <div id="message" class="alert alert-info" role="alert">{{msg}}</div>
+    {% endif %}
+    <div>
+        <form method="post" action="{% url 'book' stu %}">
+            {% csrf_token %}
+            <input id="form" class="form-control" name="book" list="books" placeholder="Enter the Book name">
+            <datalist id="books">
+                {% for b in booklist %}
+                    <option value="{{b.bookName}}">
+                {% endfor %}
+            </datalist>
+            <input class="btn btn-info" type="submit" value="Search">
+        </form>
+    </div>
+    <h2>{{b.bookName}}</h2>
+    <ul>
+        <li>Authors: {% for au in authors %}{{au}}   ,{% endfor %}</li>
+        <li>Publisher: {{b.publication}}</li>
+        <li>Edition: {{b.edition}}</li>
+        <li>Total Number of Copies: {{c}}</li>
+        <li>Number of Copies available: {{a}}</li>
+        {% if a == 0 %} 
+        <li>Number of Copies available for reserving: {{r}}</li>
+        {% endif %}
+    </ul>
+    
+    <div>
+        {% if a != 0 %}
+            <a class="btn btn-info" href="{% url 'book2' stu=stu b=b.id %}">Add Book to Booklist</a>
+    {% endif %} 
+        {% if a == 0 and r != 0 %} 
+            <a class="btn btn-info" href="{% url 'reserve_book' stu=stu b=b.id %}">Reserve this Book</a>
+        {% endif %}
+        <a class="btn btn-info" href="{% url 'stu_home' stu=stu %}">Back to Home</a>
+    </div>
+    
+</body>
+</html>
+
+
+

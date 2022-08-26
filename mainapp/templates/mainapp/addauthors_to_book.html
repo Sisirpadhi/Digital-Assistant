@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Add authors</title>
+    <style>
+        body{
+            margin: 20px;
+            background-color: #FFF5EE; 
+        }
+
+        #message{
+            text-align: center;
+        }
+
+        button{
+            margin: 5px;
+        }
+        #lt{
+            padding-left: 150px;
+            width: 60%;
+            float: left;
+        }
+        #rt{
+            width: 40%;
+            float: left;
+        }
+        #header{
+            margin-bottom: 50px;
+            font-size: 70px;
+        }
+        .m{
+            width: 250px;
+        }
+        .p{
+            width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <h1 align="center" id="header">Add Authors to Book</h1>
+    <div id="lt">
+    <h1>{{b.bookName}}</h1>
+    <ul>
+        <li>Book Name : {{b.bookName}}</li>
+        <li>Publisher : {{b.publication}}</li>
+        <li>Edition   : {{b.edition}}</li>
+    </ul>
+    <h2>Authors</h2>
+    <ul>
+        {% for a in authors %}
+            <li>{{a}}</li>
+        {% empty %}
+            <li>Authors not yet added</li>
+        {% endfor %} 
+    </ul>
+    <h2>Add Author</h2>
+    <form action="{% url 'addauthor_to_book' lib=lib bId=b.id %}" method="post">
+        {% csrf_token %} 
+        <div class="input-group p">
+        <input class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" name="author" list="non_authors" placeholder="Enter Author name">
+        <datalist id="non_authors">
+            {% for na in non_authors %} 
+            <option value="{{na}}"></option>
+            {% endfor %}
+        </datalist>
+        <input class="btn btn-outline-secondary"  type="submit" value="Add">
+        </div>
+    </form>
+    </div>
+    <div id="rt">
+    <p align="center"><a href="{% url 'add_bookcopy' lib %}"><button class="btn btn-primary m">Back to add Book copy page</button></a></p>
+    <p align="center"><a href="{% url 'add_newbook' lib %}"><button class="btn btn-primary m">Back to add Book </button></a></p>
+    </div>
+</body>
+</html>
